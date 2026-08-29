@@ -1,0 +1,389 @@
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>のっぷるるるのATLIER NOP</title>
+</head>
+<style>
+body{
+    background:#050505;
+    color:#EDEFF2;
+    font-family:'Noto Sans JP', sans-serif;
+}
+</style>
+<script>
+const lang = "ja";
+if(lang.startsWith("ja")){
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap";
+    link.onload = () => {
+        console.log("Noto Sans JP loaded");
+    };
+    link.onerror = () => {
+        console.log("Font load failed");
+    };
+    document.head.appendChild(link);
+}
+</script>
+<br><br><br>
+<center>
+<font color= "#EDEFF2" size = "3">テストページになります。<br><br>
+<br>
+<br>
+<table><tr><td width = "800"><font color= "#EDEFF2" size = "3">
+ちょっと進捗遅れてるのでこちらに、できるだけ報告内容を書こうと思います。
+<br>
+<br>
+<br>2026/08/28
+<br>
+<br>
+<br>唇が灰色なんですが…なぜ！
+<br>これを修正する場合は画像編集ソフトで１枚１枚コピペして結合して私の指が痙攣しますね
+<br>
+<br>いい感じに進んでるのは間違いありません
+<br>あと、１週間前後でゲームは完成予定
+<br>
+<br><img src="image/newcharaanime.png">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>2026/08/23
+<br>キャラクターアニメーションの作り直し
+<br>JSONの追加実装（ Config Data, Language, Result Ranking )
+<br>エンディング
+<br>翻訳全般（英語になってる部分とボイスを下部に実装）
+<br>画質と低スペックモードの実装
+<br>爽快感といい感じのフラストレーションなレベルデザイン
+<br>
+<br>finally!
+<br>
+<br>
+<br>
+<br>〇France Keyboard 配列対応（これは一旦止める判断してましたが、再度入れ直すことにしました）
+<br>
+<br>〇Smart Phone 入力
+<br>　　〇プレレンダリング
+<br>　　〇処理
+<br>　　〇描画
+<br>
+<br>〇Game Pad 入力
+<br>〇GUIの入力
+<br>〇アイテムショップをAny Deviceで入力する
+<br>〇リザルトのマウスの入力画面
+<br>
+<br>〇サブ制作
+<br>　〇アイテムショップを開きやすく
+<br>　〇アイテムショップBUYの範囲を大きくする
+<br>　〇アイテムショップの出口を大きくする
+<br>　〇キーボードでポーズ　ミュート　コンフィグ処理を可能にする
+<br>　〇画質クオリティーの設定
+<br>
+<br>〇ボスの移動ルーチン
+<br>〇QWERの名前変わっても描画する
+<br>〇QWERの入力設定を変えても入力可能にする
+<br>〇一部のモンスターの連射を遅くしました。
+<br>〇爽快感とちょうどいいストレスと頭痛にならないレベル調整
+<br>
+<br>
+<br>バグ対応
+<br>〇ミュートオンにしてコンフィグに入って戻ったら音が鳴るバグ修正
+<br>〇ポーズしてQを使って戻った後に、ポーズができなくなる事象が発生
+<br>〇ポーズボタン押して長時間経って戻ると処理が重くなっている事象が発生
+<br>〇警備ロボの判定を再修正
+<br>〇十字キー入力　スキルボタンを表示されない
+<br>〇死ぬとアサルトの音になる
+<br>〇バリアーが外れないバグが発生　バリア時間2秒～2.8秒
+<br>〇アイテムショップのヒット判定の下部がクリックできない事象が発生
+<br>〇ゲーム画面に入ってすぐにポーズを押される事象が発生
+<br>〇ポーズ中に動けてしまう不具合が発生
+<br>〇WASDと十字キーで弾が連射になる
+<br>〇スキルを打って死ぬと、スキルが止まってリスタート後に発射される
+<br>〇長時間ポーズ中後に１面のボスが出てきてしまった。ポーズ後に処理が重くなる事象が発生
+<br>〇ポーズで雲が止まってない事象が発生
+<br>
+<br>
+<br>
+<br><br>2026/08/18
+<br>〇トップ画面にきらきら星を入れる。（入れてみましたが、目がチカチカするので取り消しました。）
+<br>〇ポーズボタンをキャンセルキー（Esc, Skill1, Del, Back Space）で解除できるようにしました。
+<br>
+<br>
+<br>
+<br>2026/08/16
+<br>
+<br>制作中
+<br>ボスの移動ルーチン
+<br>Game Pad 入力
+<br>Smart Phone 入力
+<br>キャラクターアニメーションの作り直し
+<br>France Keyboard 配列対応（これは一旦止める判断してましたが、再度入れ直すことにしました）
+<br>JSONの追加実装（ Config Data, Language, Result Ranking )
+<br>エンディング
+<br>翻訳全般（英語になってる部分とボイスを下部に実装）
+<br>画質と低スペックモードの実装
+<br>爽快感といい感じのフラストレーションなレベルデザイン
+<br>
+<br>finally!
+<br>
+<br>
+<br>
+<br><img src="image/charaimg2.png">
+<br>
+<br>〇BGM編集　及び切り替え実装
+<br>　〇BGMの読み込み
+<br>　〇BGMからちょうちょ
+<br>　〇ちょうちょからBGM
+<br>　〇BGMからボス
+<br>　〇ボスからBGM
+<br>
+<br>〇アイテムショップの出る時間
+<br>　〇３０秒
+<br>　〇９０秒
+<br>　〇死んだ分だけ短くなる
+<br>
+<br>〇ちょうちょで自動コイン集め
+<br>　〇ちょうちょ画像編集
+<br>　〇ちょうちょ画像取込
+<br>　〇ちょうちょプレレンダリング
+<br>　〇ちょうちょ処理
+<br>　〇ちょうちょ描画
+<br>　〇ちょうちょの出る時間
+<br>　〇４５秒
+<br>
+<br>〇敵を倒すごとにCD短くなる
+<br>　〇５秒に１回CD半減
+<br>　〇１０秒に１回２体湧き
+<br>
+<br>〇Mob吹き出し移植
+<br>　〇プレレンダリング
+<br>　〇処理
+<br>　〇描画１
+<br>　〇描画２
+<br>
+<br>〇ショップのキャンセリングバグ。キャンセルボタンを使う
+<br>〇続けてくれてありがとうのボイス追加
+<br>〇ボスを倒した後の処理
+<br>〇アイテムショップのバグ修正
+<br>〇敵のゴールドドロップ実装
+<br>〇敵のHP実装
+<br>〇敵のルーチンタイプ
+<br>
+<br>
+<br>
+<br>2026/08/10
+<br>
+<br>アニメーションを実装しようとしましたが、その前にデモを上げたいです。巻き髪も同時制作中
+<br><img src="image/charaimg.png">
+<br>
+<br>
+<br>〇Qスキルのタイミング調整
+<br>
+<br>〇味方スキル移植
+<br>　〇プレレンデリング
+<br>　　〇リアルタイム
+<br>　　〇移植
+<br>　　〇当たり
+<br>　　　〇Q
+<br>　　　〇W
+<br>　　　〇E
+<br>　　　〇R
+<br>
+<br>〇Dead Anime
+<br>　〇キャラクター死亡演出遅延　〇黒弾幕のリスタート
+<br>〇バイブレーションボタン入力変更
+<br>　〇バイブレーション試験
+<br>　〇Config  〇バイブオンオフ
+<br>
+<br>〇リザルト画面の追加
+<br>　〇Score表示　獲得賞金額
+<br>
+<br>〇モブ攻撃実装
+<br>　〇プレレンデリング
+<br>　〇リアルタイム
+<br>　〇描画
+<br>　　〇ボスアニメーション
+<br>　　〇当たり
+<br>
+<br>　　〇BOSS1の仕様変更する
+<br>
+<br>
+<br>
+<br>2026/08/03
+<br><video src="image/movie0803.mp4" controls width="640" height="360"></video>
+<br>
+<br>〇リザルト画面の追加　獲得賞金額　倒したモンスターの数　与ダメージ
+<br>〇アイテムショップ実装
+<br>
+<br>
+<br>2026/07/28
+<br><video src="image/deadanime2.mp4" controls width="640" height="360"></video>
+<br>死亡演出方法を変えてみました。いい感じです
+<br>現在制作中：リザルト画面の追加　獲得賞金額　倒したモンスターの数　与ダメージ
+<br>
+<br>2026/07/27
+<br><video src="image/deadanime.mp4" controls width="640" height="360"></video>
+<br>
+<br>
+<br>
+<br>
+<br>2026/07/25
+<br>やや作る量を増やしすぎてる感が否めませんが、まあいいでしょう
+<br>
+<br>〇Dead Animation キャラクター死亡遅延演出	
+<br>〇黒弾幕のリスタート
+<br>〇Config	バイブオンオフ バイブレーション試験
+<br>
+<br>リザルト画面の追加　獲得賞金額　倒したモンスターの数　与ダメージ
+<br>ちょうちょでコイン集め
+<br>ドローンショップを移行
+<br>味方スキルを移行
+<br>敵の攻撃を移行
+<br>Mob吹き出しを移行
+<br>
+<br>ここでデモを公開できると思います
+<br>
+<br>
+<br>2026/07/24
+<br>敵の攻撃パターン無事終了しました。
+<br><video src="image/mobattack.mp4" controls width="640" height="360"></video>
+<br>
+<br>2026/07/18
+<br>新キャラを試行錯誤中。立ち絵に合わせて、キャラクターをアップデート中。ちょっと頭のてっぺん大きいかな。あと目が小さい。顔のＥラインが甘い
+<br><img src="image/newchara.png">
+<br>
+<br>敵の攻撃パターンを現在作ってます。画像はのせるほどでもありませんが、とりあえず４体できました
+<br>敵は１１体出る予定なのであと７体です
+<br>
+<br>2026/07/13
+<br>敵の攻撃パターン　ルーチンをプログラミングしてます
+<br>
+<br><img src="image/mobroutine.png" controls width ="800">
+<br>
+<br>
+<br>
+<br>2026/07/09
+<br>調子を崩してましたが、やや回復したので制作を再開
+<br>オンライン実習室というYOUTUBEのライブはとても興味深い。周りの人たちが勉強、在宅、家事、創作と作業して共感できる
+<br>余談をしましたが、スキルのエフェクトはできました。
+<br>
+<br>まずはグレネード
+<br>
+<br><img src="image/grenadeanim.gif">
+<br>
+<br>
+<br>
+<br>
+<br>ウルトです
+<br>
+<br><img src="image/bazookaanim.gif">
+<br>
+<br>
+<br>死亡エフェクトです
+<br>
+<br><img src="image/bluehanabi.gif">
+<br>
+<br>2026/06/27
+<br>Configは一応完成。ただ処理が重いことがちょっと心配。スマホは動くのかな
+<br>
+<br>Config
+<br>・Touch Gestures入力
+<br>・バイブレーション試験
+<br>
+<br>2026/06/24
+<br>けっこう進んだぞ！Game Pad終了したのやばい！嬉しい！
+<br>カスタマイズの表示方法変更処理　終了
+<br>フランス語キーボード配列AZERTY対応　処理不足のため断念
+<br>QWER入力　終了
+<br>十字キー入力　終了
+<br>Game Pad　終了
+<br>言語をゲームパッド、キーボードで変更する　終了
+<br>
+<br>
+<br>終了タスク　2026/06/20
+<br>コンフィグ内容の入力はできたので、処理と描画する
+<br>
+<br>設定画面入ると画面が最大化しちゃうんだ！
+<br><video src="image/dekakunaru.mp4" controls width="640" height="360"></video>
+<br>
+<br>
+<br>終了タスク　2026/06/19
+<br>翻訳の追加。トップ画面とボイス内容２６ワード＊３３言語
+<br>簡易入力設定の入れ替え
+<br>
+<br>スマホゲーやんないからわかんないけど、こんな感じの入力で合ってるかな？
+<br><img src="image/testimage4.png" width="640">
+<br>
+<br>お買い物はいつだって楽しい。ここの店員元はおじさんだったんだ
+<br><video src="image/test1.mp4" controls width="640" height="360"></video>
+<br>
+<br>翻訳をがんばりました。ただ、文字がはみ出てるのと、GUIをきれいに行を揃えたいなと思います。明日はもっと進むといいな。
+<br><video src="image/test0.mp4" controls width="640" height="360"></video>
+<br>
+<br>
+<br>
+<br><img src="image/testimage1.png" width="640">
+<br>
+<br><img src="image/testimage2.png" width="640">
+<br>
+<br><img src="image/testimage3.png" width="640">
+<br>
+<br>Monster から Charaへの攻撃
+<br>
+<br>Score表示　獲得賞金額
+<br>
+<br>ここでデモ版公開できるかと思います。
+<br>
+<br>エンドロール作成
+<br>
+<br>Mob吹き出しの微調整
+<br>
+<br>アニメーション追加
+<br>真上移動　真下移動
+<br>斜め上移動　斜め下移動
+<br>
+<br>死亡時のAnimationを追加します。
+<br>何もしてない時の状態のアニメーションを追加します。
+<br>
+<br>トップ画面の飾りつけ
+<br>
+<br>
+<br>Last Up Date 2026/07/19
+<br>
+<br>終了タスク
+<br>翻訳作業をスクリプトに埋め込み完了 06/09
+<br>吹き出しに台詞を埋め込みましたが、左右の幅がうまくいきませんでした。
+<br>33言語と、言語によって文字の横幅に差分あり、処理できませんでした。
+<br>33言語の処理は困難とし、ChatGPTの提案で吹き出しは固定のまま進めることにしました。
+<br>
+<br><img src="image/testimage0.png" width="640">
+<br>
+<br>
+</font>
+</td></tr></table>
+<br>
+<br>
+過去にご紹介した内容です。<br><br>
+<a href = "heiko.html" >テスト1</a><br>
+<a href = "index3.html" >テスト2</a><br>
+<a href = "index3.html" >テスト3</a><br>
+<br>
+<br>動画は他人の音声が入ってたため、迷惑かけたくないので消しました。再度またアップロードしたいと思います。
+<br><br><br>
+こちらはVOICE VOX 冥鳴ひまりさんを使用しています。
+<br><br><br>
+<a href = "index.html" >Test home</a><br><br><br>
+<a href = "../index.html" >Home</a><br>
+<br><br><br>
+
+since 2015.04.23<br>
+(C)2016 ATELIER NOP
+<br><br><br><br><br><br>
+</font>
+</center>
+<!-- FC2, inc.-->
+<img src="//media.fc2.com/counter_img.php?id=50" style="visibility:hidden" alt="inserted by FC2 system" width="0" height="0">
+<!-- FC2, inc.-->
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>平行四辺形同士STG</title>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+background:#000;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+width:100vw;
+height:100vh;
+}
+
+canvas{
+display:block;
+background:#000;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="game" width="1280" height="720"></canvas>
+
+<script>
+
+///////////////////////////////////////////////////////////////////////
+// セットアップ
+///////////////////////////////////////////////////////////////////////
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+let c = 0;
+
+//プレイヤー
+const player = {
+x: -100,
+y: canvas.height / 2,
+speed: 5
+
+};
+const charaimg = new Image();
+charaimg.src = "image/chara.png";
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+// モンスター
+///////////////////////////////////////////////////////////////////////
+const mobs = [];
+
+for(let i = 0; i < 16; i++){
+
+mobs.push({
+x: canvas.width + Math.random() * 1000,
+y: 100 + Math.random() * 400,
+maxhp: 50,
+hp: 50,
+r: Math.random() * 360,
+speed: 2,
+img:0,
+});
+
+}
+
+
+///////////////////////////////////////////////////////////////////////
+// 入力
+///////////////////////////////////////////////////////////////////////
+const keys = {};
+
+let mouseDown = false;
+
+window.addEventListener("keydown", e => {
+keys[e.key] = true;
+});
+
+window.addEventListener("keyup", e => {
+keys[e.key] = false;
+});
+
+window.addEventListener("mousedown", e => {
+
+if(e.button === 0){
+mouseDown = true;
+}
+
+});
+
+window.addEventListener("mouseup", e => {
+
+if(e.button === 0){
+mouseDown = false;
+}
+
+});
+
+///////////////////////////////////////////////////////////////////////
+// マウスなめらか移動
+///////////////////////////////////////////////////////////////////////
+let targetX = player.x;
+let targetY = player.y;
+
+canvas.addEventListener("mousemove", e => {
+
+const rect = canvas.getBoundingClientRect();
+
+targetX = e.clientX - rect.left;
+targetY = e.clientY - rect.top;
+
+});
+
+
+
+///////////////////////////////////////////////////////////////////////
+// 平行四辺形当たり判定（SAT）
+///////////////////////////////////////////////////////////////////////
+function projectPolygon(axis, points){
+
+    let min = axis.x * points[0].x + axis.y * points[0].y;
+    let max = min;
+
+    for(let i = 1; i < points.length; i++){
+
+        const p = axis.x * points[i].x + axis.y * points[i].y;
+
+        if(p < min) min = p;
+        if(p > max) max = p;
+    }
+
+    return { min, max };
+}
+
+function normalize(v){
+
+    const len = Math.hypot(v.x, v.y);
+
+    return {
+        x: v.x / len,
+        y: v.y / len
+    };
+}
+
+function polygonsCollide(polyA, polyB){
+
+    const polygons = [polyA, polyB];
+
+    for(let p = 0; p < polygons.length; p++){
+
+        const polygon = polygons[p];
+
+        for(let i = 0; i < polygon.length; i++){
+
+            const next = (i + 1) % polygon.length;
+
+            const edge = {
+                x: polygon[next].x - polygon[i].x,
+                y: polygon[next].y - polygon[i].y
+            };
+
+            const axis = normalize({
+                x: -edge.y,
+                y: edge.x
+            });
+
+            const projA = projectPolygon(axis, polyA);
+            const projB = projectPolygon(axis, polyB);
+
+            if(projA.max < projB.min || projB.max < projA.min){
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+///////////////////////////////////////////////////////////////////////
+//SATここまで
+///////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////////////////
+// 更新
+///////////////////////////////////////////////////////////////////////
+function update(delta){
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////
+// マウスなめらか移動
+///////////////////////////////////////////////////////////////
+player.x += (targetX - player.x) * 0.12;
+player.y += (targetY - player.y) * 0.12;
+///////////////////////////////////////////////////////////////
+// 画面外制限
+///////////////////////////////////////////////////////////////
+if(player.x < 0) player.x = 0;
+if(player.x > canvas.width) player.x = canvas.width;
+
+if(player.y < 0) player.y = 0;
+if(player.y > canvas.height) player.y = canvas.height;
+
+
+///////////////////////////////////////////////////////////////
+// モンスター更新
+///////////////////////////////////////////////////////////////
+for(let i = mobs.length - 1; i >= 0; i--){
+
+    const m = mobs[i];
+
+    ///////////////////////////////////////////////////////////
+    // モンスター移動
+    ///////////////////////////////////////////////////////////
+
+    m.x -= m.speed * delta;
+
+    m.y += Math.cos((c + m.r) * Math.PI / 180);
+
+    ///////////////////////////////////////////////////////////
+    // プレイヤー当たり判定
+    ///////////////////////////////////////////////////////////
+
+    const playerPoly = [
+
+        { x: player.x + 20,  y: player.y - 20 },
+        { x: player.x -130,  y: player.y + 60 },
+        { x: player.x -110,  y: player.y + 60 },
+        { x: player.x + 50,  y: player.y - 20 }
+
+    ];
+
+    ///////////////////////////////////////////////////////////
+    // モンスター当たり判定
+    ///////////////////////////////////////////////////////////
+
+    const mobPoly = [
+
+        { x: m.x + 20, y: m.y + 30 },
+        { x: m.x + 70, y: m.y + 30 },
+        { x: m.x + 50, y: m.y + 80 },
+        { x: m.x + 0, y: m.y + 80 }
+
+    ];
+
+    ///////////////////////////////////////////////////////////
+    // SAT判定
+    ///////////////////////////////////////////////////////////
+
+    if(polygonsCollide(playerPoly, mobPoly)){
+
+        m.img = 1;
+
+    }else{
+
+        m.img = 0;
+
+    }
+
+    ///////////////////////////////////////////////////////////
+    // 画面左へ行ったら復活
+    ///////////////////////////////////////////////////////////
+
+    if(m.x < -40){
+
+        m.x = canvas.width + Math.random() * 500;
+        m.y = 100 + Math.random() * 400;
+        m.img = 0;
+
+    }
+}
+
+
+}
+
+
+///////////////////////////////////////////////////////////////////////
+// 描画
+///////////////////////////////////////////////////////////////////////
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+///////////////////////////////////////////////////////////////
+// プレイヤー
+///////////////////////////////////////////////////////////////
+ ctx.drawImage( charaimg, player.x - 150,player.y - 30);
+ctx.globalAlpha = 0.5;
+
+//プレイヤーの当たり判定
+ctx.fillStyle = "purple";
+ctx.beginPath();
+ctx.moveTo(player.x + 20, player.y - 20);
+ctx.lineTo(player.x - 130, player.y + 60);
+ctx.lineTo(player.x - 110, player.y + 60);
+ctx.lineTo(player.x + 50, player.y - 20);
+ctx.closePath();
+ctx.fill();
+
+ctx.globalAlpha = 1;
+
+/*
+///////////////////////////////////////////////////////////
+// モンスターの当たり判定
+///////////////////////////////////////////////////////////
+
+ctx.globalAlpha = 0.5;
+
+ctx.fillStyle = "purple";
+
+ctx.beginPath();
+ctx.moveTo(m.x + 20, m.y + 30);
+ctx.lineTo(m.x + 40, m.y + 80);
+ctx.lineTo(m.x + 120, m.y + 80);
+ctx.lineTo(m.x + 100, m.y + 30);
+ctx.closePath();
+ctx.fill();
+
+ctx.globalAlpha = 1;
+*/
+
+///////////////////////////////////////////////////////////
+// モンスター描画
+///////////////////////////////////////////////////////////
+for(let i = 0; i < mobs.length; i++){
+
+    const m = mobs[i];
+
+    ctx.globalAlpha = 0.5;
+
+    ctx.fillStyle = m.img ? "red" : "purple";
+
+    ctx.beginPath();
+    ctx.moveTo(m.x + 20, m.y + 30);
+    ctx.lineTo(m.x + 40, m.y + 30);
+    ctx.lineTo(m.x + 120, m.y + 80);
+    ctx.lineTo(m.x +  100, m.y + 80);
+    ctx.closePath();
+    ctx.fill();
+
+if ( m.img == 1 ) {
+ctx.globalAlpha = 0.5;
+
+//プレイヤーの当たり判定
+ctx.fillStyle = "red";
+
+ctx.beginPath();
+ctx.moveTo(player.x + 20, player.y - 20);
+ctx.lineTo(player.x - 130, player.y + 60);
+ctx.lineTo(player.x - 110, player.y + 60);
+ctx.lineTo(player.x + 50, player.y - 20);
+ctx.closePath();
+ctx.fill();
+
+}
+
+
+
+    ctx.globalAlpha = 1;
+}
+
+c++;
+
+}
+
+///////////////////////////////////////////////////////////////////////
+// ループ
+///////////////////////////////////////////////////////////////////////
+let last = performance.now();
+function loop(now){
+const delta = (now - last) / 16.666;
+last = now;
+update(delta);
+draw();
+requestAnimationFrame(loop);
+
+}
+
+requestAnimationFrame(loop);
+
+</script>
+
+</body>
+</html>
